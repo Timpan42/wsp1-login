@@ -11,7 +11,10 @@ router.get('/login', function(req, res, next) {
 });
 router.post('/login', function(req, res, next) {
     const { username, password } = req.body;
-    
+    if (username.length = 0) {
+        console.log("tjabba");
+    }
+
 });
 
 router.get('/signin', function(req, res, next) {
