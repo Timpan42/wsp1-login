@@ -39,3 +39,9 @@ else¤
 
 ### password rules
 - length 
+
+## veka 6 fredag
+Test 6-8 fungerar
+Vi har lyckats hasha och implementerade hashen i databasen
+Bcrypt initialized
+Fixa compare nästa gång
