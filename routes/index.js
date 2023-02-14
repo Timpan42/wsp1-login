@@ -4,8 +4,11 @@ const router = express.Router();
 const bcrypt = require('bcrypt');
 const pool = require('../utils/database.js');
 const promisePool = pool.promise();
+
+
 /* GET home page. */
 router.get('/', async function (req, res, next) {
+    console.log(req.session.login)
     res.render('index.njk', { title: 'Login ALC' });
 
 });
@@ -18,7 +21,14 @@ router.get('/login', async function (req, res, next) {
 });
 
 router.get('/profile', async function (req, res, next) {
-    res.render('profile.njk', { title: 'Profile' });
+    if(req.session.login == 1){
+        
+        res.render('profile.njk', { title: 'Profile' });
+    }
+    else{
+        return res.redirect('/login')
+    }
+
 });
 
 router.post('/login', async function (req, res, next) {
@@ -40,7 +50,9 @@ router.post('/login', async function (req, res, next) {
            
             if (result === true) {
                // return res.send('Welcome')
+                req.session.login = 1; 
                 return res.redirect('/profile');
+
                 
             }
             else {

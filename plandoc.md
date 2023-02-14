@@ -45,3 +45,9 @@ Test 6-8 fungerar
 Vi har lyckats hasha och implementerade hashen i databasen
 Bcrypt initialized
 Fixa compare nästa gång
+
+## veka 7 tisdag
+test 2 klart
+session init
+profile funkar bara om du har loggat in först
+Nästa gång: Göra test 3 
