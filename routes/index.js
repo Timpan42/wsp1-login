@@ -23,28 +23,29 @@ router.post('/login', async function(req, res, next) {
         res.send('Username is Required')
     }
     if (password.length == 0) {
-        res.send('Password is Required')
+        res.json('Password is Required')
     }
-    console.log(password)
+
     
-    bcrypt.compare(password, hash, function(err, result) {
-        //logga in eller nåt
-      console.log(err)
-      console.log(result)
+    console.log()
+    // bcrypt.compare(password, hash, function(err, result) {
+    //     //logga in eller nåt
+    //   console.log(err)
+    //   console.log(result)
 
-    })
+    // })
 });
 
-router.get('/test/:password', async function (req, res, next){ 
-    console.log(req.params)
-    const password = req.params.password
-   // const [password] = await promisePool.query('SELECT password FROM dbusers WHERE none = ?', [password]);
-    bcrypt.hash(password,  10, function (err, hash){
-        console.log(hash);
-        return res.json(hash);
+// router.get('/test/:password', async function (req, res, next){ 
+//     console.log(req.params)
+//     const password = req.params.password
+//    // const [password] = await promisePool.query('SELECT password FROM dbusers WHERE none = ?', [password]);
+//     bcrypt.hash(password,  10, function (err, hash){
+//         console.log(hash);
+//         return res.json(hash);
 
-    })
-});
+//     })
+// });
 
 router.get('/signin', function(req, res, next) {
     res.render('signin.njk', { title: 'sign' });
