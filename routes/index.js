@@ -21,20 +21,20 @@ router.get('/login', async function (req, res, next) {
 });
 
 router.get('/profile', async function (req, res, next) {
-  
 
-    if(req.session.login == 1){
 
-        res.render('profile.njk', { title: 'Profile', name: req.session.username  })
+    if (req.session.login == 1) {
+
+        res.render('profile.njk', { title: 'Profile', name: req.session.username })
     }
-    else{
+    else {
         return res.status(401).send('Access denied')
     }
 
 });
 
 router.post('/profile', async function (req, res, next) {
-    req.body = {logout};
+    req.body = { logout };
 
 
 });
@@ -43,17 +43,17 @@ router.get('/logout', async function (req, res, next) {
 
 });
 
-router.post('/logout',  async function (req, res, next) {
-   
+router.post('/logout', async function (req, res, next) {
 
-    if(req.session.login == 1){
+
+    if (req.session.login == 1) {
         req.session.login = 0;
         res.redirect('/')
     }
-    else{
+    else {
         return res.status(401).send('Access denied')
     }
-    
+
 });
 
 router.post('/login', async function (req, res, next) {
@@ -68,27 +68,27 @@ router.post('/login', async function (req, res, next) {
     }
 
     const [user] = await promisePool.query('SELECT * FROM dbusers WHERE name = ?', [username]);
-    
-        
-        bcrypt.compare(password, user[0].password, function (err, result) {
-            //logga in eller nåt
-           
-            if (result === true) {
-               // return res.send('Welcome')
-                req.session.username = username;
-                req.session.login = 1; 
-                return res.redirect('/profile');
 
-                
-            }
-            
-            else {
-                return res.send("Invalid username or password")
-            }
-            
-        })
-        
-   
+
+    bcrypt.compare(password, user[0].password, function (err, result) {
+        //logga in eller nåt
+
+        if (result === true) {
+            // return res.send('Welcome')
+            req.session.username = username;
+            req.session.login = 1;
+            return res.redirect('/profile');
+
+
+        }
+
+        else {
+            return res.send("Invalid username or password")
+        }
+
+    })
+
+
 });
 
 router.get('/crypt/:password', async function (req, res, next) {
@@ -106,5 +106,32 @@ router.get('/signin', function (req, res, next) {
     res.render('signin.njk', { title: 'sign' });
 });
 
+router.get('/register', function (req, res, next) {
+    res.render('register.njk', { title: 'register' });
+
+});
+
+router.post('/register', async function (req, res, next) {
+    const { username, password, passwordConfirmation } = req.body;
+
+    if (username == "") {
+        return res.send('Username is Required')
+        // console.log("Username is Required")
+        // errors.push("Username is Required")
+        // return res.json(errors)
+    }
+    if (password.length == 0) {
+        return res.send('Password is Required')
+    }
+    if (passwordConfirmation.length == 0) {
+        return res.send('Password is Required')
+
+    }
+    if (password != passwordConfirmation) {
+        return res.send('Passwords do not match')
+    }
+
+    
+});
 
 module.exports = router;

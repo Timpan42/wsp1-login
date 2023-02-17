@@ -51,3 +51,10 @@ test 2 klart
 session init
 profile funkar bara om du har loggat in först
 Nästa gång: Göra test 3 
+
+## veka 7 fredag
+test 3 klart
+logout fungerar
+sign in börjat
+10/13 klar på test 4
+Nästa gång: Se ifall namn i register clashar med namn i databasen. Stoppa in användaren i databasen. Logga in registrerad användare.
