@@ -21,14 +21,39 @@ router.get('/login', async function (req, res, next) {
 });
 
 router.get('/profile', async function (req, res, next) {
+  
+
     if(req.session.login == 1){
-        
-        res.render('profile.njk', { title: 'Profile' });
+
+        res.render('profile.njk', { title: 'Profile', name: req.session.username  })
     }
     else{
-        return res.redirect('/login')
+        return res.status(401).send('Access denied')
     }
 
+});
+
+router.post('/profile', async function (req, res, next) {
+    req.body = {logout};
+
+
+});
+
+router.get('/logout', async function (req, res, next) {
+
+});
+
+router.post('/logout',  async function (req, res, next) {
+   
+
+    if(req.session.login == 1){
+        req.session.login = 0;
+        res.redirect('/')
+    }
+    else{
+        return res.status(401).send('Access denied')
+    }
+    
 });
 
 router.post('/login', async function (req, res, next) {
@@ -50,16 +75,19 @@ router.post('/login', async function (req, res, next) {
            
             if (result === true) {
                // return res.send('Welcome')
+                req.session.username = username;
                 req.session.login = 1; 
                 return res.redirect('/profile');
 
                 
             }
+            
             else {
                 return res.send("Invalid username or password")
             }
+            
         })
-    
+        
    
 });
 
