@@ -58,3 +58,10 @@ logout fungerar
 sign in börjat
 10/13 klar på test 4
 Nästa gång: Se ifall namn i register clashar med namn i databasen. Stoppa in användaren i databasen. Logga in registrerad användare.
+
+## veka 8 fredag
+test 4 klart
+register fungerar
+delete user
+sessions är i full fart
+Nästa gång: Skapa test för delete user + andra funktioner kanske
